@@ -1,49 +1,55 @@
-//Business UI Logic
-const valueOneNumber = function inputOneValue () {
- let returnValue1 = parseInt(document.getElementById("numberOne").value);
- return returnValue1;
-};
-
-const valueTwoNumber = function inputTwoValue () {
-  let returnValue2 = parseInt(document.getElementById("numberTwo").value);
-  return returnValue2;
-};
-
-function addOperation() {
-  const addOutput = valueOneNumber + valueTwoNumber;
+function addOperation(valueOne, valueTwo) {
+  const addOutput = valueOne + valueTwo;
+  console.log(addOutput);
   return addOutput;
 }
 
-function subtractOperation() {
-  const subtractOutput = valueOneNumber - valueTwoNumber;
+function subtractOperation(valueOne, valueTwo) {
+  const subtractOutput = valueOne - valueTwo;
+  console.log(subtractOutput);
   return subtractOutput;
 }
 
-function divideOperation() {
-  const divideOutput = valueOneNumber / valueTwoNumber;
+function divideOperation(valueOne,  valueTwo) {
+  const divideOutput = valueOne / valueTwo;
+  console.log(divideOutput);
   return divideOutput;
 }
 
-function multiplyOperation() {
-  const multiplyOutput = valueOneNumber * valueTwoNumber;
+function multiplyOperation(valueOne, valueTwo) {
+  const multiplyOutput = valueOne * valueTwo;
+  console.log(multiplyOutput);
   return multiplyOutput;
 }
 
 
-function calculateAnswer(valueOneNumber, valueTwoNumber) {
-  const functionOption = document.getElementById("functionInput").value;
+let operationAnswer = function calculateAnswer() {
+  const functionOption = parseInt(document.getElementById("functionInput").value);
+  let valueOne = parseInt(document.getElementById("numberOne").value);
+  let valueTwo = parseInt(document.getElementById("numberTwo").value);
+
   if (functionOption === 1) {
-    addOperation();
+    result = addOperation(valueOne, valueTwo);
   } else if (functionOption === 2) {
-    subtractOperation();
+    result = subtractOperation(valueOne, valueTwo);
   } else if (functionOption === 3) {
-    divideOperation();
+    result = divideOperation(valueOne, valueTwo);
   } else if (functionOption === 4) {
-    multiplyOperation();
+    result = multiplyOperation(valueOne, valueTwo);
   } else {
     console.log("Calculate Answer Broke");
   }
+
+  document.getElementById("answer").innerText = result;
 };
 
-let button = document.querySelector("button");
-button.addEventListener("click", calculateAnswer);
+function submitInput(event) {
+  event.preventDefault();
+  operationAnswer();
+  
+}
+
+window.addEventListener("load", function() {
+  const form = document.getElementById("calculatorInput");
+  form.addEventListener("submit", submitInput);
+});
